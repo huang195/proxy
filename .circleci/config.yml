@@ -10,19 +10,12 @@ jobs:
     resource_class: xlarge
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - linux_fastbuild-bazel-cache-{{ checksum "WORKSPACE" }}
       # To build docker containers or run tests in a docker
       - setup_remote_docker
       - run: rm ~/.gitconfig
       - run: make check
       - run: make deb
       - run: make test
-      - save_cache:
-          key: linux_fastbuild-bazel-cache-{{ checksum "WORKSPACE" }}
-          paths:
-            - /home/circleci/.cache/bazel
 
 workflows:
   version: 2
