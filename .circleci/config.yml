@@ -5,6 +5,7 @@ jobs:
     docker:
       - image: istio/ci:go1.11-bazel0.22-clang7
     environment:
+      - BAZEL_STARTUP_ARGS: "--max_idle_secs=5"
       - BAZEL_BUILD_ARGS: "--local_resources=12288,5,1"
       - BAZEL_TEST_ARGS: "--test_env=ENVOY_IP_TEST_VERSIONS=v4only --test_output=all --local_resources=12288,5,1 --local_test_jobs=8"
     resource_class: xlarge
